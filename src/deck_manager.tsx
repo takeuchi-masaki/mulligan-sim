@@ -18,22 +18,22 @@ interface Deck {
 }
 
 export function extractDeckHash(url: string): string | undefined {
-    const deckUrl = 'https://shadowverse-portal.com/deck/';
-    const deckbuilderUrl = 'https://shadowverse-portal.com/deckbuilder/create/';
+    const deckUrl = "https://shadowverse-portal.com/deck/";
+    const deckbuilderUrl = "https://shadowverse-portal.com/deckbuilder/create/";
     if (url.startsWith(deckUrl)) {
-        const suffix = '?lang=';
+        const suffix = "?lang=";
         const hashStartIndex = deckUrl.length + 4;
         let suffixIndex = url.indexOf(suffix, hashStartIndex + 200);
-        if (suffixIndex == undefined) {
+        if (suffixIndex === -1) {
             suffixIndex = url.length;
         }
         return url.slice(hashStartIndex, suffixIndex);
     } else if (url.startsWith(deckbuilderUrl)) {
-        const prefix = '?hash=';
-        const suffix = '&lang=';
+        const prefix = "?hash=";
+        const suffix = "&lang=";
         const hashStartIndex = url.indexOf(prefix) + prefix.length + 4;
         let suffixIndex = url.indexOf(suffix, hashStartIndex + 200);
-        if (suffixIndex == undefined) {
+        if (suffixIndex === -1) {
             suffixIndex = url.length;
         }
         return url.slice(hashStartIndex, suffixIndex);
