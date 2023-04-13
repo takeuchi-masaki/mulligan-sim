@@ -56,6 +56,13 @@ interface AllCardsJson {
 
 export let rot_cards: CardJson[] = [];
 export let all_cards: CardJson[] = [];
+export let all_map: HashMap<number, CardJson>;
+
+function updateMap() {
+    all_cards.forEach(card => {
+        all_map.set(card.card_id, card);
+    });
+}
 
 export function initCardList() {
     if (!fs.existsSync('./data/all_cards.json') ||
@@ -65,6 +72,7 @@ export function initCardList() {
         let all_cards_file = require('./data/all_cards.json') as AllCardsJson;
         all_cards = all_cards_file.data.cards;
         rot_cards = require('./data/rot_cards.json') as CardJson[];
+        updateMap();
     }
 }
 
@@ -114,4 +122,5 @@ export async function updateJsonFiles() {
     let all_cards_file = require('./data/all_cards.json') as AllCardsJson;
     all_cards = all_cards_file.data.cards;
     rot_cards = require('./data/rot_cards.json') as CardJson[];
+    updateMap();
 }

@@ -1,6 +1,6 @@
 import HashMap from 'hashmap';
 
-const KEY: HashMap<string, number> = new HashMap<string, number>();
+const KEY = new HashMap<string, number>();
 const keystr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
 for (let i = 0; i < keystr.length; i++) {
     KEY.set(keystr[i], i);
@@ -47,7 +47,6 @@ export async function deckcode_to_card_id_list(deckcode: string): Promise<number
         throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
     }
     const resp = await res.json();
-    const resp_data: DeckcodeResponse = resp.data;
-    const deck_hash: string = resp_data.hash;
+    const deck_hash: string = resp.data.hash;
     return deckhash_to_cardid_list(deck_hash);
 }
