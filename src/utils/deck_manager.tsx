@@ -1,6 +1,6 @@
 import HashMap from "hashmap";
-import { deckcode_to_card_id_list, deckhash_to_cardid_list } from "./utils/import_deckcode";
-import { all_map } from "./utils/import_json";
+import { deckcode_to_card_id_list, deckhash_to_cardid_list } from "./import_deckcode";
+import { all_map } from "./import_json";
 
 interface Card {
     card_name: string,

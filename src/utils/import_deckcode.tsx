@@ -1,9 +1,7 @@
-import HashMap from 'hashmap';
-
-const KEY = new HashMap<string, number>();
+let KEY: number[] = [256];
 const keystr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
 for (let i = 0; i < keystr.length; i++) {
-    KEY.set(keystr[i], i);
+    KEY[keystr.charCodeAt(i)] = i;
 }
 
 interface DeckcodeResponse {
@@ -15,9 +13,9 @@ interface DeckcodeResponse {
 
 export function cardhash_to_cardid(card_hash: string): number {
     let id: number = 0;
-    for (const c of card_hash) {
+    for (let i = 0; i < card_hash.length; i++) {
         id *= 64;
-        id += KEY.get(c)!;
+        id += KEY[card_hash.charCodeAt(i)];
     }
     return id;
 }

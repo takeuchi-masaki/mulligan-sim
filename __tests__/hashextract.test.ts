@@ -1,4 +1,4 @@
-import { extractDeckHash } from '../src/deck_manager';
+import { extractDeckHash } from '../src/utils/deck_manager';
 
 describe('extractHashFromDeckURL', () => {
     test('should extract hash from deck URL', () => {
