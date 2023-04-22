@@ -27,7 +27,11 @@ export function extractDeckHash(url: string): string | undefined {
         if (suffixIndex === -1) {
             suffixIndex = url.length;
         }
-        return url.slice(hashStartIndex, suffixIndex);
+        let hash = url.slice(hashStartIndex, suffixIndex);
+        if (hash.length != 239) {
+            return undefined;
+        }
+        return hash;
     } else if (url.startsWith(deckbuilderUrl)) {
         const prefix = "?hash=";
         const suffix = "&lang=";
@@ -36,17 +40,21 @@ export function extractDeckHash(url: string): string | undefined {
         if (suffixIndex === -1) {
             suffixIndex = url.length;
         }
-        return url.slice(hashStartIndex, suffixIndex);
+        let hash = url.slice(hashStartIndex, suffixIndex);
+        if (hash.length != 239) {
+            return undefined;
+        }
+        return hash;
     }
     return undefined;
 }
 
-export async function createDeckFromDeckcode(deckcode: string, deckname: string) {
+export async function deckFromDeckcode(deckcode: string, deckname: string) {
     const card_id_list = await deckcode_to_card_id_list(deckcode);
     createDeck(card_id_list, deckname);
 }
 
-export async function createDeckFromDecklist(decklist: string, deckname: string) {
+export async function deckFromLink(decklist: string, deckname: string) {
     let deckhash = extractDeckHash(decklist);
     if (deckhash == undefined) {
         return;
